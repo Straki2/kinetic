@@ -329,7 +329,7 @@ equivalent stop with a line saying what to use instead.
 
 <img src="assets/screens/llama-flags-ngl.svg" alt="kinetic run with llama.cpp's -m, -p, -n, -ngl 99 and --temperature flags, answered on the GPU" width="100%">
 
-`llama-cpp-kinetic` is on PyPI soon. libllama itself is not replaced;
+`pip install llama-cpp-kinetic` makes `import llama_cpp` run on Kinetic. libllama itself is not replaced;
 Kinetic has its own [C API](https://veloresearch.github.io/kinetic/bindings.html#c).
 Details: [Switch from llama.cpp](https://veloresearch.github.io/kinetic/switch-from-llama-cpp.html)
 and [every llama.cpp flag](docs/src/llama-flags-table.md).
