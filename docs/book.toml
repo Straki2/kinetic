@@ -1,0 +1,19 @@
+[book]
+title = "Kinetic"
+description = "Open engine for running AI locally. Runs your GGUF models today, and .ktc models verified and tuned for your hardware."
+authors = ["Velocity"]
+language = "en"
+src = "src"
+
+[build]
+build-dir = "book"
+create-missing = false
+
+[output.html]
+git-repository-url = "https://github.com/Veloresearch/kinetic"
+edit-url-template = "https://github.com/Veloresearch/kinetic/edit/main/docs/src/{path}"
+site-url = "/kinetic/"
+no-section-label = true
+
+[output.html.search]
+enable = true
