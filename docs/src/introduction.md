@@ -5,7 +5,8 @@ and .ktc models verified and tuned for your hardware.**
 
 Kinetic runs language, embedding and reranking models on your own computer,
 from one binary with an OpenAI-compatible server. It is written in Rust,
-runs on Windows and Linux (x86-64), on the CPU and on NVIDIA GPUs. Kinetic
+runs on Windows and Linux (x86-64), on the CPU, on NVIDIA GPUs through CUDA
+and on AMD and Intel GPUs through Vulkan. Kinetic
 never connects to the network, except when you run `kinetic pull`.
 
 ```sh
@@ -16,7 +17,7 @@ kinetic serve Qwen3.5-4B-Q4_K_M.gguf     # OpenAI API at http://127.0.0.1:8080/v
 ## Why Kinetic
 
 - **Your files, unchanged.** Kinetic reads GGUF files as llama.cpp writes
-  them, from Qwen3.5 and LFM3 to Llama, Gemma 3, Granite and Falcon-H1, in
+  them, from Qwen3.5, Gemma 4 and LFM3 to Llama, Gemma 3, Granite and Falcon-H1, in
   every common quantization.
 - **Faster without changing the answer.** Speculative decoding, prompt
   caching and a shortcut through the output layer are on by default and
@@ -32,8 +33,8 @@ kinetic serve Qwen3.5-4B-Q4_K_M.gguf     # OpenAI API at http://127.0.0.1:8080/v
   `run`, `chat` and `serve` never download anything. The server listens on
   `127.0.0.1` and refuses requests from web pages.
 - **Drop-in for llama.cpp users.** The common flags work as they do in
-  llama.cpp, and the ones Kinetic does not need are explained instead of
-  rejected. See [llama.cpp flags](llama-flags.md).
+  llama.cpp, the ones Kinetic does not need are accepted, and the few with
+  no equivalent stop with a line saying what to use instead. See [llama.cpp flags](llama-flags.md).
 - **Verifiable models.** A `.ktc` file carries weights, tokenizer and chat
   template with a hash of every byte and an optional signature, and
   `kinetic verify` checks them.
