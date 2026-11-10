@@ -39,7 +39,8 @@ irm https://raw.githubusercontent.com/Veloresearch/kinetic/main/scripts/install.
 On Linux:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Veloresearch/kinetic/main/scripts/install.sh | sh
+curl -fsSL \
+  https://raw.githubusercontent.com/Veloresearch/kinetic/main/scripts/install.sh | sh
 ```
 
 **2. Download a model.** LFM3 1.7B (1.1 GB) is quick even on a laptop CPU:
@@ -407,10 +408,6 @@ client, editor plugin or agent framework that takes a base URL works.
 
 <img src="assets/screens/serve.svg" alt="kinetic serve starting on the GPU, then a curl chat completion request and its JSON answer naming three rivers" width="100%">
 
-<table>
-<tr>
-<td width="50%" valign="top">
-
 **Python**
 
 ```python
@@ -428,9 +425,6 @@ for chunk in stream:
         print(chunk.choices[0].delta.content or "", end="")
 ```
 
-</td>
-<td width="50%" valign="top">
-
 **JavaScript**
 
 ```js
@@ -446,10 +440,6 @@ const reply = await client.chat.completions.create({
 });
 console.log(reply.choices[0].message.content);
 ```
-
-</td>
-</tr>
-</table>
 
 **Tool calls and structured output.** Models call your functions in the
 OpenAI shape. `response_format` with a JSON Schema, or a GBNF `grammar`,
