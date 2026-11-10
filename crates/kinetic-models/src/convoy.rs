@@ -290,25 +290,32 @@ mod tests {
             std::thread::yield_now();
             inside.fetch_sub(1, Ordering::SeqCst);
         };
-        std::thread::scope(|s| {
-            for caller in 0..4 {
-                let (convoy, inside, widest) = (&convoy, &inside, &widest);
-                s.spawn(move || {
-                    let seat = convoy.seat();
-                    for step in 0..30 {
-                        alone(inside);
-                        let job = caller * 1000 + step;
-                        let got = convoy.run(job, |jobs| {
-                            alone(inside);
-                            widest.fetch_max(jobs.len(), Ordering::Relaxed);
-                            jobs.iter().map(|j| j + 1).collect()
-                        });
-                        assert_eq!(got, job + 1);
-                        seat.away(std::thread::yield_now);
-                    }
-                });
+        // sharing passes depends on scheduling, so a busy runner gets a few
+        // rounds before the test calls it a failure
+        for _ in 0..50 {
+            if widest.load(Ordering::Relaxed) > 1 {
+                break;
             }
-        });
+            std::thread::scope(|s| {
+                for caller in 0..4 {
+                    let (convoy, inside, widest) = (&convoy, &inside, &widest);
+                    s.spawn(move || {
+                        let seat = convoy.seat();
+                        for step in 0..30 {
+                            alone(inside);
+                            let job = caller * 1000 + step;
+                            let got = convoy.run(job, |jobs| {
+                                alone(inside);
+                                widest.fetch_max(jobs.len(), Ordering::Relaxed);
+                                jobs.iter().map(|j| j + 1).collect()
+                            });
+                            assert_eq!(got, job + 1);
+                            seat.away(std::thread::yield_now);
+                        }
+                    });
+                }
+            });
+        }
         assert!(widest.load(Ordering::Relaxed) > 1);
     }
 
