@@ -3,7 +3,7 @@
 #   docker build -f docker/Dockerfile -t kinetic .
 #   docker run --rm -p 8080:8080 -v "$PWD/models:/models:ro" kinetic /models/model.gguf
 
-FROM rust:1.91-bookworm AS build
+FROM rust:1.96-bookworm AS build
 WORKDIR /src
 # Only the sources: rust-toolchain.toml would make rustup fetch another toolchain.
 COPY Cargo.toml Cargo.lock ./
