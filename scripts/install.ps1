@@ -3,8 +3,9 @@
 Installs Kinetic for the current user on Windows.
 
 .DESCRIPTION
-Downloads a Kinetic release from GitHub (the CUDA build when an NVIDIA GPU
-is present, otherwise the CPU build), checks it against the release's
+Downloads a Kinetic release from GitHub (the full build, which runs on
+NVIDIA GPUs through CUDA, on AMD and Intel GPUs through Vulkan and on the
+CPU; -Cpu takes the smaller CPU-only build), checks it against the release's
 SHA256SUMS, unpacks it into %LOCALAPPDATA%\Programs\kinetic and puts that
 folder on the user's PATH. Needs no administrator rights.
 
@@ -17,7 +18,7 @@ irm https://raw.githubusercontent.com/Veloresearch/kinetic/main/scripts/install.
 param(
     # A release such as 0.1.0; the latest by default.
     [string]$Version = '',
-    # Install the CPU build even when an NVIDIA GPU is present.
+    # Install the smaller CPU-only build.
     [switch]$Cpu
 )
 
@@ -36,8 +37,8 @@ if (-not $Version) {
 }
 $Version = $Version.TrimStart('v')
 
-$nvidia = @(Get-CimInstance Win32_VideoController -ErrorAction SilentlyContinue | Where-Object { $_.Name -match 'NVIDIA' }).Count -gt 0
-$variant = if ($Cpu -or -not $nvidia) { 'cpu' } else { 'cuda' }
+# the cuda archive is the full build: CUDA, Vulkan and the CPU in one binary
+$variant = if ($Cpu) { 'cpu' } else { 'cuda' }
 $name = "kinetic-$Version-windows-x86_64-$variant"
 $base = "https://github.com/$repo/releases/download/v$Version"
 

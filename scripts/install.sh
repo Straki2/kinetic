@@ -1,8 +1,9 @@
 #!/bin/sh
 # Installs Kinetic for the current user on Linux x86-64.
 #
-# Downloads a Kinetic release from GitHub (the CUDA build when an NVIDIA
-# driver is present, otherwise the CPU build), checks it against the
+# Downloads a Kinetic release from GitHub (the full build, which runs on
+# NVIDIA GPUs through CUDA, on AMD and Intel GPUs through Vulkan and on the
+# CPU; --cpu takes the smaller CPU-only build), checks it against the
 # release's SHA256SUMS and installs it into ~/.local/bin, with its C library
 # and header in ~/.local/lib and ~/.local/include. Needs no root.
 #
@@ -63,13 +64,8 @@ if [ -z "$version" ]; then
 fi
 version="${version#v}"
 
-if [ -z "$variant" ]; then
-    if [ -e /proc/driver/nvidia/version ] || command -v nvidia-smi >/dev/null 2>&1; then
-        variant=cuda
-    else
-        variant=cpu
-    fi
-fi
+# the cuda archive is the full build: CUDA, Vulkan and the CPU in one binary
+[ -n "$variant" ] || variant=cuda
 
 name="kinetic-${version}-linux-x86_64-${variant}"
 base="https://github.com/$repo/releases/download/v${version}"

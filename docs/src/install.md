@@ -13,11 +13,11 @@ irm https://raw.githubusercontent.com/Veloresearch/kinetic/main/scripts/install.
 curl -fsSL https://raw.githubusercontent.com/Veloresearch/kinetic/main/scripts/install.sh | sh
 ```
 
-The scripts download the latest release (the CUDA build when an NVIDIA GPU is
-present), check it against the release's `SHA256SUMS` and install it for the
+The scripts download the latest release (the full build, which runs on NVIDIA
+GPUs through CUDA, on AMD and Intel GPUs through Vulkan and on the CPU), check it against the release's `SHA256SUMS` and install it for the
 current user: into `%LOCALAPPDATA%\Programs\kinetic`, put on the user `PATH`, on
 Windows, and into `~/.local/bin` on Linux. `-Version 0.1.0` / `--version 0.1.0`
-picks a release and `-Cpu` / `--cpu` the CPU build.
+picks a release and `-Cpu` / `--cpu` the smaller CPU-only build.
 
 ## Release binaries
 
