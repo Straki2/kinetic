@@ -490,7 +490,7 @@ Examples: [Python, C and Rust](https://veloresearch.github.io/kinetic/bindings.h
 | Family | GGUF architecture | Notes |
 |---|---|---|
 | Qwen3.5, dense and MoE | `qwen35`, `qwen35moe` | drafts from its MTP block, images |
-| Gemma 4 | `gemma4` | E2B and E4B, images |
+| Gemma 4 | `gemma4` | E2B and E4B with images; the 26B A4B mixture of experts is not supported yet |
 | Qwen3, Qwen2.5 | `qwen3`, `qwen2` | thinking and tool calls |
 | Llama 3, Mistral, SmolLM2 | `llama` | |
 | Gemma 3 | `gemma3` | |

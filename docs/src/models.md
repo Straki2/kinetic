@@ -47,7 +47,7 @@ The names are the GGUF `general.architecture` values.
 | `qwen2` | Qwen2.5 | yes | yes |
 | `qwen3` | Qwen3 | yes | yes |
 | `gemma3` | Gemma 3 | yes | yes |
-| `gemma4` | Gemma 4 text, such as E2B and E4B | yes | yes |
+| `gemma4` | Gemma 4 E2B and E4B; the 26B A4B mixture of experts is not supported yet | yes | yes |
 | `ernie4_5` | ERNIE 4.5 | yes | yes |
 | `hunyuan-dense` | Hunyuan dense models | yes | yes |
 | `exaone4` | EXAONE 4.0 | yes | yes |
