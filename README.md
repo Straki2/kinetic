@@ -12,8 +12,9 @@
 
 ### The open engine for running AI on your own computer.
 
-Written in Rust. It runs the GGUF files you already have, on the CPU and on NVIDIA, AMD
-and Intel GPUs, from one binary. Fast, and no speed-up ever changes the answer.
+Written in Rust. It reads GGUF files, the format llama.cpp uses, and runs the models it
+supports on the CPU and on NVIDIA, AMD and Intel GPUs, from one binary. Fast, and no
+speed-up ever changes the answer.
 
 <br>
 
@@ -58,8 +59,9 @@ kinetic chat LiquidAI/LFM3-1.7B-GGUF
 <a name="quick-start"></a>
 Not sure which model to take? Run `kinetic` alone: it checks your computer,
 suggests two or three models that run well on it (the ones you already have
-first), and one key press downloads it and opens a chat. Any GGUF file you
-already have works too: `kinetic chat path/to/model.gguf`.
+first), and one key press downloads it and opens a chat. A GGUF file you already
+have works too if its model family is [supported](#supported-models):
+`kinetic chat path/to/model.gguf`.
 
 <div align="center">
 
@@ -301,7 +303,7 @@ architecture, and `kinetic bench` checks it on your machine.
 
 ## Switching from llama.cpp
 
-Your GGUF files work unchanged, and one binary stands in for `llama-server`,
+Your GGUF files work unchanged when their model family is supported, and one binary stands in for `llama-server`,
 `llama-cli`, `llama-bench`, `llama-quantize` and `llama-perplexity`, with
 their flags. Pick your case; each is one step.
 

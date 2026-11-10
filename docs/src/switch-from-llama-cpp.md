@@ -1,6 +1,7 @@
 # Switch from llama.cpp
 
-Your GGUF files work unchanged. Each case below is one step.
+Your GGUF files work unchanged when their model family is supported (see
+[Models and formats](models.md)). Each case below is one step.
 
 ## You run llama-server
 
